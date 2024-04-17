@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Here!</title>
+  <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ff0000;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #000000;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      color: rgb(255, 255, 255);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-header:hover{
+      color: #ff0303;
+    }
+
+    .form-grp {
+      margin-bottom: 20px;
+    }
+    .form-grp label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: rgb(255, 19, 19);
+    }
+    .form-grp input[type="text"],
+    .form-grp input[type="password"],
+    .form-grp input[type="number"],
+    .form-grp textarea,
+    .form-grp select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    .form-grp input[type="text"]:focus,
+    .form-grp input[type="password"]:focus,
+    .form-grp input[type="number"]:focus,
+    .form-grp textarea:focus,
+    .form-grp select:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+    .form-grp input[type="text"].invalid,
+    .form-grp input[type="password"].invalid,
+    .form-grp input[type="number"].invalid,
+    .form-grp textarea.invalid,
+    .form-grp select.invalid {
+      border-color: red;
+      border-width: 0.4vw;
+    }
+    .form-grp input[type="text"].valid,
+    .form-grp input[type="password"].valid,
+    .form-grp input[type="number"].valid,
+    .form-grp textarea.valid,
+    .form-grp select.valid {
+      border-color: green;
+      border-width: 0.4vw;
+    }
+    .btn-group {
+      text-align: center;
+    }
+    .btn-group button {
+      padding: 10px 20px;
+      background-color: #ff0000;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      ;
+      transition: background-color 0.3s ease;
+    }
+    .btn-group button:hover {
+      background-color: #000000;
+      color: #ff0000;
+    }
+
+   
+    #output {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #000000;
+      border-radius: 4px;
+      color: #ff0303;
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-header">
+      <h2>Sign Up</h2>
+    </div>
+
+    <form id="signup-form">
+
+      <div class="form-grp">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required onblur="validateInput(this)" onfocus="removeValidation(this)">
+      </div>
+
+      <div class="form-grp">
+        <label for="email">Email:</label>
+        <input type="text" id="email" required onblur="validateInput(this)" onfocus="removeValidation(this)">
+      </div>
+
+      <div class="form-grp">
+        <label for="password">Password:</label>
+        <input type="password" id="password" required onblur="validateInput(this)" onfocus="removeValidation(this)">
+      </div>
+
+      <div class="form-grp">
+        <label for="age">Age:</label>
+        <input type="number" id="age" required onblur="validateInput(this)" onfocus="removeValidation(this)">
+      </div>
+
+      <div class="form-grp">
+        <label for="gender">Gender:</label>
+        <select id="gender" required onblur="validateInput(this)" onfocus="removeValidation(this)">
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="Not Mentioned">Prefer not to mention</option>
+        </select>
+      </div>
+
+      <div class="form-grp">
+        <label for="bio">Bio:</label>
+        <textarea id="bio" rows="4" required onblur="validateInput(this)" onfocus="removeValidation(this)"></textarea>
+      </div>
+
+      <div class="btn-group">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </div>
+
+    </form>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function validateInput(input) {
+      if (input.value.trim() === '') {
+        input.classList.add('invalid');
+      } else {
+        input.classList.remove('invalid');
+        input.classList.add('valid');
+      }
+    }
+
+    function removeValidation(input) {
+      input.classList.remove('invalid', 'valid');
+    }
+
+    const form = document.getElementById('signup-form');
+    const outputDiv = document.getElementById('output');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const age = document.getElementById('age').value;
+      const gender = document.getElementById('gender').value;
+      const bio = document.getElementById('bio').value;
+
+      const outputText = `
+        <h2>Obtained Information:</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Password:</strong> ${password}</p>
+        <p><strong>Age:</strong> ${age}</p>
+        <p><strong>Gender:</strong> ${gender}</p>
+        <p><strong>Bio:</strong> ${bio}</p>
+      `;
+      outputDiv.innerHTML = outputText;
+      outputDiv.style.display = 'block'; 
+    });
+
+    form.addEventListener('reset', function() {
+      outputDiv.innerHTML = '';
+      outputDiv.style.display = 'none'; // Hide the output field
+      const inputs = document.querySelectorAll('input, select, textarea');
+      inputs.forEach(input => {
+        input.classList.remove('invalid', 'valid');
+      });
+    });
+  </script>
+</body>
+</html>
